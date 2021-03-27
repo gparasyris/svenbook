@@ -1,0 +1,13 @@
+<p>orderbook works!</p>
+
+<div *ngFor="let row of bids | fn : truncateArray : null : length ; trackBy: trackByMethod; let i= index"
+style="border-bottom: 1px solid black;">
+  <i>
+    <app-orderbook-row
+      [price]="row[0]"
+      [amount]="row[1]"
+      [total]="row[2]"
+    >
+    </app-orderbook-row>
+  </i>
+</div>
