@@ -2,7 +2,7 @@ import { Subject } from "rxjs";
 
 
 
-export class WebSocketServiceSpy {
+export class WebSocketServiceMock {
 
   private socket$ = new Subject<any>();
 

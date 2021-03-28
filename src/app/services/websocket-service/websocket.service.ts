@@ -1,10 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-// import { environment } from '../../environments/environment';
-import { catchError, tap, switchAll, delayWhen, retryWhen } from 'rxjs/operators';
-import { EMPTY, Observable, Subject, timer } from 'rxjs';
-export const WS_ENDPOINT = 'wss://www.cryptofacilities.com/ws/v1'; // environment.wsEndpoint;
-export const RECONNECT_INTERVAL = 5000;
+import { environment } from '@environments/environment';
+import { catchError, switchAll } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+export const WS_ENDPOINT = environment.wsEndpoint;
 
 @Injectable({
   providedIn: 'root'
@@ -33,9 +32,6 @@ export class WebsocketService implements OnDestroy {
     this.socket$.complete();
   }
 
-  /**
- * Return a custom WebSocket subject which reconnects after failure
- */
   private getNewWebSocket(webSocketUri) {
     return webSocket({
       url: webSocketUri,

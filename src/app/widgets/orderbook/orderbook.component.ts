@@ -1,5 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { WebsocketService } from '../websocket.service';
+import { SubscriptionLike } from 'rxjs';
+import { WebsocketService } from '@services/websocket-service/websocket.service';
 
 interface IwebSocketResponse {
   feed: string,
@@ -39,6 +40,9 @@ export class OrderbookComponent implements OnInit {
   currentWindowWidth: number;
 
   iterator = [];
+
+  webSocketSubscription: SubscriptionLike;
+
   constructor(public service: WebsocketService) {
 
   }
@@ -67,7 +71,7 @@ export class OrderbookComponent implements OnInit {
     this.title = config.title;
     this.service.connect();
     this.service.sendMessage({ "event": config.event, "feed": config.feed, "product_ids": [config.product_id] });
-    this.service.socket$.subscribe(
+    this. webSocketSubscription = this.service.socket$.subscribe(
       msg => {
         this.incomingData = msg;
       },
@@ -152,6 +156,10 @@ export class OrderbookComponent implements OnInit {
   truncateArray(array: any[], length: number, reverse = false) {
     if (!reverse) return array.slice(0, length);
     return array.slice(0, length).reverse();
+  }
+
+  ngOnDestroy() {
+    this.webSocketSubscription?.unsubscribe();
   }
 
 }

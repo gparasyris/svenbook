@@ -1,11 +1,11 @@
-import { WebsocketService } from './../websocket.service';
-import { WebSocketServiceSpy, mockData, mockDataWithZero } from './../websocket.service.spy';
+import { WebsocketService } from '@services/websocket-service/websocket.service';
+import { WebSocketServiceMock, mockData, mockDataWithZero } from '@services/websocket-service/websocket.service.mock';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrderbookComponent } from './orderbook.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 describe('OrderbookComponent', () => {
   let component: OrderbookComponent;
@@ -19,7 +19,7 @@ describe('OrderbookComponent', () => {
         MatGridListModule,
         MatTableModule
       ],
-      providers: [{ provide: WebsocketService, useClass: WebSocketServiceSpy }]
+      providers: [{ provide: WebsocketService, useClass: WebSocketServiceMock }]
     })
       .compileComponents();
   });
@@ -35,7 +35,6 @@ describe('OrderbookComponent', () => {
   });
 
   it('should connect to websocket', () => {
-    // expect(component).toBeTruthy();
     const conf = {
       "event": "subscribe",
       "feed": "book_ui_1",
@@ -47,9 +46,7 @@ describe('OrderbookComponent', () => {
   });
 
   it('should calculate bid & ask limit variables', () => {
-    // expect(component).toBeTruthy();
 
-    // expect(component.title).toBe(conf.title);
     component.incomingData = mockData;
 
     expect(component.firstSell).toBe(54266.5);
@@ -71,12 +68,12 @@ describe('OrderbookComponent', () => {
   it('should truncate array', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8];
     const resp = component.truncateArray(arr, 3);
-    expect(resp).toEqual([1,2,3])
+    expect(resp).toEqual([1, 2, 3])
   });
 
   it('should truncate && reverse return array', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8];
     const resp = component.truncateArray(arr, 3, true);
-    expect(resp).toEqual([3,2,1])
+    expect(resp).toEqual([3, 2, 1])
   });
 });

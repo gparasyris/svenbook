@@ -19,13 +19,37 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@pages/*": [
+        "src/app/pages/*"
+      ],
+      "@widgets/*": [
+        "src/app/widgets/*"
+      ],
+      "@pipes/*": [
+        "src/app/pipes/*"
+      ]
+
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": false,
     "strictInputAccessModifiers": false,
     "strictTemplates": false,
-    "enableIvy":false
+    "enableIvy": false
   }
 }

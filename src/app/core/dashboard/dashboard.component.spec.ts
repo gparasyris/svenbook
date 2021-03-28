@@ -1,6 +1,6 @@
-import { DashboardService } from './dashboard.service';
+import { DashboardService } from '@services/dashboard-service/dashboard.service';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { OrderbookModule } from '../orderbook/orderbook.module';
+import { OrderbookModule } from '@widgets/orderbook/orderbook.module';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { DashboardComponent } from './dashboard.component';
 import { RouterTestingModule } from '@angular/router/testing';

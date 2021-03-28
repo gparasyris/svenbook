@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FunctionPipe } from '../function.pipe';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
+import { FunctionPipe } from '@pipes/function-pipe/function.pipe';
 
 
 @NgModule({
