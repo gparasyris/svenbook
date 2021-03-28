@@ -9,7 +9,13 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compodoc": "npx compodoc -p ./compodoc.json",
-    "show-doc": "./node_modules/.bin/compodoc src -s"
+    "show-doc": "./node_modules/.bin/compodoc src -s",
+    "build:docker-dev": "docker build . -f Dockerfile.dev -t angular-docker-dev",
+    "run:docker:dev": "docker run -p 4200:4200 angular-docker-dev",
+    "run:docker:dev:lr": "docker run -p 4200:4200 -d --rm -v $(pwd):/app -v /app/node_modules angular-docker-dev",
+    "build:docker:prod": "docker build . -f Dockerfile.prod -t angular-docker-prod",
+    "run:docker:prod": "docker run -p 80:80 angular-docker-prod",
+    "docker:all:prod": "npm run build:docker:prod && npm run run:docker:prod"
   },
   "private": true,
   "dependencies": {
