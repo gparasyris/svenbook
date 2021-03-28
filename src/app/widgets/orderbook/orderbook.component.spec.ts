@@ -10,6 +10,7 @@ import { SharedModule } from '@app/shared/shared.module';
 describe('OrderbookComponent', () => {
   let component: OrderbookComponent;
   let fixture: ComponentFixture<OrderbookComponent>;
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -66,7 +67,6 @@ describe('OrderbookComponent', () => {
   });
 
   it('should truncate array', () => {
-    const arr = [1, 2, 3, 4, 5, 6, 7, 8];
     const resp = component.truncateArray(arr, 3);
     expect(resp).toEqual([1, 2, 3])
   });

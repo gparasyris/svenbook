@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IConfiguration } from '@interfaces/configuration.interface';
 import { DashboardService } from '@services/dashboard-service/dashboard.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { DashboardService } from '@services/dashboard-service/dashboard.service'
 })
 export class DashboardComponent implements OnInit {
 
-  resp: any;
+  config: IConfiguration;
   dashboardName: string = '';
   errorMessage: string = '';
 
@@ -26,11 +27,11 @@ export class DashboardComponent implements OnInit {
     }
 
   }
-  getDashboardConfig() {
+  getDashboardConfig(): void {
     this.dashboardService.get(`assets/${this.dashboardName}.config.json`)
       .subscribe(
-        (data: any) => {
-          this.resp = data;
+        (data: IConfiguration) => {
+          this.config = data;
         },
         err => {
           this.errorMessage = `Error while retrieving config for dashboard '${this.dashboardName}': ${err?.body || err?.message}`

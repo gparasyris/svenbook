@@ -1,6 +1,6 @@
 <div class="container h-100">
   <div class="row" *ngIf="!errorMessage; else errorTemplate">
-    <div *ngFor="let column of resp?.layout?.columns" class="col-{{column?.size}}">
+    <div *ngFor="let column of config?.layout?.columns" class="col-{{column?.size}}">
       <div *ngFor="let widget of column.widgets">
         <div [ngSwitch]="widget.type">
           <div *ngSwitchCase="'orderbook'">

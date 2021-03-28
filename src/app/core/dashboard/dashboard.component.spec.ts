@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { from } from 'rxjs';
 import { Type } from '@angular/core';
+import { IConfiguration } from '@app/interfaces/configuration.interface';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -52,7 +53,7 @@ describe('DashboardComponent', () => {
 
   it('it should retrieve dashboard configuration for orderbook-single', fakeAsync(() => {
 
-    const config = {
+    const config: IConfiguration = {
       "name": "orderbook-single",
       "layout": {
         "type": "row",
@@ -80,7 +81,7 @@ describe('DashboardComponent', () => {
     req.flush(config);
 
     tick();
-    expect(component.resp).toEqual(config);
+    expect(component.config).toEqual(config);
     expect(req.request.method).toBe('GET');
   }));
 });

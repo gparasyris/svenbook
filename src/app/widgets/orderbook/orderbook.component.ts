@@ -1,16 +1,9 @@
+import { IWidgetConfiguration } from '@interfaces/widget-configuration.interface';
+import { IwebSocketResponse } from '@interfaces/websocket.interface'
+import { IOrderTuple } from '@interfaces/order-tupple.interace';
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { WebsocketService } from '@services/websocket-service/websocket.service';
-
-interface IwebSocketResponse {
-  feed: string,
-  product_id: string,
-  bids: IOrderTuple[],
-  asks: IOrderTuple[],
-}
-
-type IOrderTuple = [number, number, number?];
-
 
 @Component({
   selector: 'app-orderbook',
@@ -67,11 +60,11 @@ export class OrderbookComponent implements OnInit {
 
   }
 
-  processConfiguration(config: any) {
+  processConfiguration(config: IWidgetConfiguration): void {
     this.title = config.title;
     this.service.connect();
     this.service.sendMessage({ "event": config.event, "feed": config.feed, "product_ids": [config.product_id] });
-    this. webSocketSubscription = this.service.socket$.subscribe(
+    this.webSocketSubscription = this.service.socket$.subscribe(
       msg => {
         this.incomingData = msg;
       },
@@ -79,70 +72,70 @@ export class OrderbookComponent implements OnInit {
     )
   }
 
-  handleData(data: IwebSocketResponse) {
-    let localBIds = JSON.parse(JSON.stringify(this.bids))
+  handleData(data: IwebSocketResponse): void {
+    let arrayCopy: any[] = JSON.parse(JSON.stringify(this.bids))
     data.bids.forEach((row) => {
-      const position = localBIds.findIndex(x => x[0] == row[0]);
+      const position = arrayCopy.findIndex(x => x[0] == row[0]);
       if (position > -1) {
         if (row[1] == 0) {
-          localBIds.splice(position, 1);
+          arrayCopy.splice(position, 1);
         }
         else {
-          localBIds[position] = [...row];
+          arrayCopy[position] = [...row];
         }
       }
       else if (row[1] != 0) {
-        localBIds.push([...row]);
+        arrayCopy.push([...row]);
       }
     });
 
-    localBIds = localBIds.
+    arrayCopy = arrayCopy.
       sort((a, b) => b[0] - a[0])
-    for (const [index, row] of localBIds.entries()) {
+    for (const [index, row] of arrayCopy.entries()) {
       let add = row[1];
       if (index !== 0) {
-        add += localBIds[index - 1][2]
+        add += arrayCopy[index - 1][2]
       }
       row[2] = add;
     }
 
-    this.bids = [...localBIds];
-    this.displayBids = [...this.truncateArray(localBIds, this.length)];
+    this.bids = [...arrayCopy];
+    this.displayBids = [...this.truncateArray(arrayCopy, this.length)];
     this.maxBid = this.displayBids[this.displayBids.length - 1][2];
     this.firstBid = this.bids[0][0];
     if (this.bids.length < this.length) {
       debugger;
     }
 
-    localBIds = JSON.parse(JSON.stringify(this.asks))
+    arrayCopy = JSON.parse(JSON.stringify(this.asks))
     data.asks.forEach((row) => {
-      const position = localBIds.findIndex(x => x[0] == row[0]);
+      const position = arrayCopy.findIndex(x => x[0] == row[0]);
       if (position > -1) {
         if (row[1] == 0) {
-          localBIds.splice(position, 1);
+          arrayCopy.splice(position, 1);
         }
         else {
-          localBIds[position] = [...row];
+          arrayCopy[position] = [...row];
         }
       }
       else if (row[1] != 0) {
-        localBIds.push([...row]);
+        arrayCopy.push([...row]);
       }
     });
 
-    localBIds = localBIds.
+    arrayCopy = arrayCopy.
       sort((a, b) => a[0] - b[0])
-    for (const [index, row] of localBIds.entries()) {
+    for (const [index, row] of arrayCopy.entries()) {
       let add = row[1];
       if (index !== 0) {
-        add += localBIds[index - 1][2]
+        add += arrayCopy[index - 1][2]
       }
       row[2] = add;
     }
-    this.displayAsks = [...this.truncateArray(localBIds, this.length, true)];
-    this.asks = [...localBIds];
+    this.displayAsks = [...this.truncateArray(arrayCopy, this.length, true)];
+    this.asks = [...arrayCopy];
     this.maxAsk = this.displayAsks[0][2];
-    this.firstSell = localBIds[0][0]
+    this.firstSell = arrayCopy[0][0]
     if (this.asks.length < this.length) {
       debugger;
     }
@@ -153,7 +146,7 @@ export class OrderbookComponent implements OnInit {
     return index;
   }
 
-  truncateArray(array: any[], length: number, reverse = false) {
+  truncateArray(array: IOrderTuple[] | any[], length: number, reverse = false): IOrderTuple[] | any[] {
     if (!reverse) return array.slice(0, length);
     return array.slice(0, length).reverse();
   }

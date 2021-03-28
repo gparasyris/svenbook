@@ -1,3 +1,4 @@
+import { IConfiguration } from '@interfaces/configuration.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -9,7 +10,7 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  get(url: string): Observable<any>{
-    return this.http.get(url);
+  get(url: string): Observable<IConfiguration>{
+    return this.http.get<IConfiguration>(url);
   }
 }

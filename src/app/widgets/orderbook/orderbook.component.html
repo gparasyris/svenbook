@@ -6,7 +6,7 @@
   <div class="container --mobile" *ngIf="currentWindowWidth < 992; else desktopTemplate">
     <div class="row">
       <div class="col info">
-        {{firstSell - firstBid}} Spread
+        {{(firstSell - firstBid) | number : '1.2-2'}} Spread
       </div>
     </div>
     <div class=" row">
@@ -17,7 +17,6 @@
             <th mat-header-cell *matHeaderCellDef> Total </th>
             <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
           </ng-container>
-
 
           <ng-container matColumnDef="Price">
             <th mat-header-cell *matHeaderCellDef> Price </th>
@@ -91,7 +90,7 @@
     </table>
 
     <div class="info">
-      {{firstSell - firstBid}} Spread
+      {{(firstSell - firstBid) | number : '1.2-2'}} Spread
     </div>
 
     <table mat-table [dataSource]="displayBids" class="mat-elevation-z8 bids-table" style="width: 100%">
