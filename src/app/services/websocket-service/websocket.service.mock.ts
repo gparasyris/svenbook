@@ -164,3 +164,11 @@ export const mockDataWithZero = {
 
   ]
 }
+
+export const preccalculatedResults = {
+  firstSell: 54266.5,
+  maxASk: 530490,
+  firstBid: 54235,
+  secondBid: 54221.5,
+  maxBid: 226496
+}

@@ -1,18 +1,18 @@
 <div>
   <h3 class="text-center">{{title}}</h3>
 </div>
-<div *ngIf="displayAsks?.length > 0" style="height: 100%;" class="fade-page">
+<div *ngIf="data.bids?.displayList?.length || data.asks?.displayList?.length"  style="height: 100%;" class="fade-page">
 
   <div class="container --mobile" *ngIf="currentWindowWidth < 992; else desktopTemplate">
     <div class="row">
       <div class="col info">
-        {{(firstSell - firstBid) | number : '1.2-2'}} Spread
+        {{(data.asks.first - data.bids.first) | number : '1.2-2'}} Spread
       </div>
     </div>
     <div class=" row">
       <div class="col">
 
-        <table mat-table [dataSource]="displayBids" class="mat-elevation-z8 bids-table" style="width: 100%">
+        <table mat-table [dataSource]="data.bids?.displayList" class="mat-elevation-z8 bids-table" style="width: 100%">
           <ng-container matColumnDef="Total">
             <th mat-header-cell *matHeaderCellDef> Total </th>
             <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
@@ -22,7 +22,7 @@
             <th mat-header-cell *matHeaderCellDef> Price </th>
             <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
               <div class="bg-div right" *ngIf="element != null && element[2]!= null"
-                [ngStyle]="{'height': '24px', 'width': ((element[2]/maxBid)*100) + '%'}">
+                [ngStyle]="{'height': '24px', 'width': (((element[2]/data.bids.last) || 0)*100) + '%'}">
               </div>
             </td>
           </ng-container>
@@ -33,13 +33,7 @@
         </table>
       </div>
       <div class="col">
-        <table mat-table [dataSource]="displayAsks.reverse()" class="mat-elevation-z8 asks-table" style="width: 100%">
-
-
-          <!-- <ng-container matColumnDef="Amount">
-            <th mat-header-cell *matHeaderCellDef> Amount </th>
-            <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
-          </ng-container> -->
+        <table mat-table [dataSource]="data.asks?.displayList?.reverse()" class="mat-elevation-z8 asks-table" style="width: 100%">
 
           <ng-container matColumnDef="Total">
             <th mat-header-cell *matHeaderCellDef> Total </th>
@@ -50,7 +44,7 @@
             <th mat-header-cell *matHeaderCellDef> Price </th>
             <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
               <div class="bg-div ask" *ngIf="element && element[2] != null"
-                [ngStyle]="{'height': '24px', 'width': ((element[2]/maxAsk)*100) + '%'}">
+                [ngStyle]="{'height': '24px', 'width': (((element[2]/data.asks.last) || 0)*100) + '%'}">
               </div>
             </td>
           </ng-container>
@@ -65,12 +59,12 @@
   </div>
 
   <ng-template #desktopTemplate>
-    <table mat-table [dataSource]="displayAsks" class="mat-elevation-z8 asks-table" style="width: 100%">
+    <table mat-table [dataSource]="data.asks?.displayList" class="mat-elevation-z8 asks-table" style="width: 100%">
       <ng-container matColumnDef="Price">
         <th mat-header-cell *matHeaderCellDef> Price </th>
         <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
           <div class="bg-div ask" *ngIf="element && element[2] != null"
-            [ngStyle]="{'height': '24px', 'width': ((element[2]/maxAsk)*100) + '%'}">
+            [ngStyle]="{'height': '24px', 'width': (((element[2]/data.asks.last) || 0)*100) + '%'}">
           </div>
         </td>
       </ng-container>
@@ -90,16 +84,16 @@
     </table>
 
     <div class="info">
-      {{(firstSell - firstBid) | number : '1.2-2'}} Spread
+      {{(data.asks.first - data.bids.first) | number : '1.2-2'}} Spread
     </div>
 
-    <table mat-table [dataSource]="displayBids" class="mat-elevation-z8 bids-table" style="width: 100%">
+    <table mat-table [dataSource]="data.bids?.displayList" class="mat-elevation-z8 bids-table" style="width: 100%">
 
       <ng-container matColumnDef="Price">
         <th mat-header-cell *matHeaderCellDef> Price </th>
         <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
           <div class="bg-div" *ngIf="element != null && element[2]!= null"
-            [ngStyle]="{'height': '24px', 'width': ((element[2]/maxBid)*100) + '%'}">
+            [ngStyle]="{'height': '24px', 'width': (((element[2]/data.bids.last) || 0)*100) + '%'}">
           </div>
         </td>
       </ng-container>

@@ -1,5 +1,5 @@
 import { WebsocketService } from '@services/websocket-service/websocket.service';
-import { WebSocketServiceMock, mockData, mockDataWithZero } from '@services/websocket-service/websocket.service.mock';
+import { WebSocketServiceMock, mockData, mockDataWithZero, preccalculatedResults } from '@services/websocket-service/websocket.service.mock';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrderbookComponent } from './orderbook.component';
@@ -50,20 +50,20 @@ describe('OrderbookComponent', () => {
 
     component.incomingData = mockData;
 
-    expect(component.firstSell).toBe(54266.5);
-    expect(component.maxAsk).toBe(530490);
-    expect(component.firstBid).toBe(54235);
-    expect(component.maxBid).toBe(226496);
+    expect(component.firstSell).toBe(preccalculatedResults.firstSell);
+    expect(component.maxAsk).toBe(preccalculatedResults.maxASk);
+    expect(component.firstBid).toBe(preccalculatedResults.firstBid);
+    expect(component.maxBid).toBe(preccalculatedResults.maxBid);
 
   });
 
   it('should remove price with 0 quantity', () => {
     component.incomingData = mockData;
-    expect(component.firstBid).toBe(54235);
+    expect(component.firstBid).toBe(preccalculatedResults.firstBid);
     console.log(component.displayBids);
     component.incomingData = mockDataWithZero;
     console.log(component.displayBids);
-    expect(component.firstBid).toBe(54221.5);
+    expect(component.firstBid).toBe(preccalculatedResults.secondBid);
   });
 
   it('should truncate array', () => {
@@ -71,7 +71,7 @@ describe('OrderbookComponent', () => {
     expect(resp).toEqual([1, 2, 3])
   });
 
-  it('should truncate && reverse return array', () => {
+  it('should truncate & reverse return array', () => {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8];
     const resp = component.truncateArray(arr, 3, true);
     expect(resp).toEqual([3, 2, 1])
