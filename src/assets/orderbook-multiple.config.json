@@ -4,7 +4,7 @@
     "type": "row",
     "columns": [
       {
-        "size": "md",
+        "size": "lg",
         "widgets": [
           {
             "type": "orderbook",
@@ -18,7 +18,7 @@
         ]
       },
       {
-        "size": "md",
+        "size": "lg",
         "widgets": [
           {
             "type": "orderbook",
@@ -33,7 +33,7 @@
         ]
       },
       {
-        "size": "sm",
+        "size": "lg",
         "widgets": [
           {
             "type": "orderbook",
