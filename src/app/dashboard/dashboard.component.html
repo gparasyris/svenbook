@@ -1,16 +1,6 @@
-<!-- <div class="content" role="main">
-
-  <app-orderbook [incomingData]="service.socket$ | async">
-
-  </app-orderbook>
-
-</div> -->
-<div class="container">
-  <div class="row">
-    <div *ngFor="let column of resp.layout.columns" class="col-{{column.size}}">
-      <!-- <app-orderbook [incomingData]="service.socket$ | async">
-
-      </app-orderbook> -->
+<div class="container h-100">
+  <div class="row" *ngIf="!errorMessage; else errorTemplate">
+    <div *ngFor="let column of resp?.layout?.columns" class="col-{{column?.size}}">
       <div *ngFor="let widget of column.widgets">
         <div [ngSwitch]="widget.type">
           <div *ngSwitchCase="'orderbook'">
@@ -25,4 +15,7 @@
 
     </div>
   </div>
+  <ng-template #errorTemplate>
+    <div class="alert-box error"><span>error: </span> {{errorMessage}}</div>
+  </ng-template>
 </div>

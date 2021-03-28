@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,15 +10,31 @@ import { ActivatedRoute } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   resp: any;
-  constructor(private http: HttpClient, private actRoute: ActivatedRoute) { }
+  dashboardName: string = '';
+  errorMessage: string = '';
+
+  constructor(private dashboardService: DashboardService, private actRoute: ActivatedRoute) { }
 
 
   ngOnInit(): void {
-    console.log(this.actRoute.snapshot.params.dashboardName)
-    this.http.get(`assets/${this.actRoute.snapshot.params.dashboardName}.config.json`)
-      .subscribe((data: any) => {
-        this.resp = data;
-      });
-  }
+    this.dashboardName = this.actRoute.snapshot.params?.dashboardName;
+    if (this.dashboardName != null) {
+      this.getDashboardConfig();
+    }
+    else {
+      this.errorMessage = `Error while loading the dashboard page, dashboard name has not been defined!`
+    }
 
+  }
+  getDashboardConfig() {
+    this.dashboardService.get(`assets/${this.dashboardName}.config.json`)
+      .subscribe(
+        (data: any) => {
+          this.resp = data;
+        },
+        err => {
+          this.errorMessage = `Error while retrieving config for dashboard '${this.dashboardName}': ${err?.body || err?.message}`
+        }
+      );
+  }
 }

@@ -1,4 +1,3 @@
-import { OrderbookRowComponent } from './orderbook-row/orderbook-row.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrderbookComponent } from './orderbook.component';
@@ -10,13 +9,13 @@ import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
-  declarations: [OrderbookComponent, OrderbookRowComponent],
+  declarations: [OrderbookComponent],
   imports: [
     CommonModule,
     SharedModule,
     MatGridListModule,
     MatTableModule
   ],
-  exports: [OrderbookComponent, OrderbookRowComponent],
+  exports: [OrderbookComponent],
 })
 export class OrderbookModule { }

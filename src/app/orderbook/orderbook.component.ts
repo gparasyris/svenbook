@@ -22,13 +22,8 @@ type IOrderTuple = [number, number, number?];
 })
 export class OrderbookComponent implements OnInit {
 
-  // @HostListener('window:resize')
-  // onResize() {
-  //   this.currentWindowWidth = window.innerWidth
-  // }
-
-  onResize(event){
-    this.currentWindowWidth = event.target.innerWidth; // window width
+  onResize(event) {
+    this.currentWindowWidth = event.target.innerWidth
   }
 
   bids: IOrderTuple[] = [];
@@ -76,7 +71,6 @@ export class OrderbookComponent implements OnInit {
       msg => {
         this.incomingData = msg;
       },
-      //     // Called whenever there is a message from the server    
       err => console.log(err),
     )
   }
@@ -110,7 +104,7 @@ export class OrderbookComponent implements OnInit {
 
     this.bids = [...localBIds];
     this.displayBids = [...this.truncateArray(localBIds, this.length)];
-    this.maxBid = localBIds[this.length + 5][2];
+    this.maxBid = this.displayBids[this.displayBids.length - 1][2];
     this.firstBid = this.bids[0][0];
     if (this.bids.length < this.length) {
       debugger;
@@ -143,7 +137,7 @@ export class OrderbookComponent implements OnInit {
     }
     this.displayAsks = [...this.truncateArray(localBIds, this.length, true)];
     this.asks = [...localBIds];
-    this.maxAsk = localBIds[this.length + 5][2]
+    this.maxAsk = this.displayAsks[0][2];
     this.firstSell = localBIds[0][0]
     if (this.asks.length < this.length) {
       debugger;
@@ -158,10 +152,6 @@ export class OrderbookComponent implements OnInit {
   truncateArray(array: any[], length: number, reverse = false) {
     if (!reverse) return array.slice(0, length);
     return array.slice(0, length).reverse();
-  }
-
-  getValue(array, index, position) {
-    return array?.[index]?.[position];
   }
 
 }

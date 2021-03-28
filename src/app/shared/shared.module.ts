@@ -4,20 +4,14 @@ import { FunctionPipe } from '../function.pipe';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProgressbarDirective } from '../progressbar.directive';
-import { ProgressbarComponent } from './progressbar/progressbar.component';
-
 
 @NgModule({
-  declarations: [FunctionPipe, ProgressbarComponent, ProgressbarDirective],
+  declarations: [FunctionPipe],
   imports: [
     CommonModule,
     MatGridListModule,
     MatTableModule
-    // BrowserAnimationsModule,
-    // MatGridListModule
   ],
-  exports:[FunctionPipe, ProgressbarComponent, ProgressbarDirective]
+  exports:[FunctionPipe]
 })
 export class SharedModule { }

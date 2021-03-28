@@ -7,10 +7,6 @@ const routes: Routes = [
     redirectTo: 'dashboards/orderbook-single',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'home',
-  //   loadChildren: () => import('./app.module').then(m => m.HomePageModule),
-  // },
   {
     path: 'dashboards/:dashboardName',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)

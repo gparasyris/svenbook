@@ -1,0 +1,33 @@
+.alert-box {
+  color:#555;
+  border-radius:10px;
+  padding:10px 10px 10px 36px;
+  margin:10px;
+  position: absolute;
+    bottom: 10px;
+
+    left: 10px;
+    right: 10px;
+
+  &.error {
+    background-color:#ffecec;
+    border:1px solid #f5aca6;
+  }
+  &.success {
+      background:#e9ffd9;
+      border:1px solid #a6ca8a;
+  }
+  &.warning {
+      background:#fff8c4;
+      border:1px solid #f2c779;
+  }
+  &.notice {
+      background:#e3f7fc;
+      border:1px solid #8ed9f6;
+  }
+}
+
+.alert-box span {
+  font-weight:bold;
+  text-transform:uppercase;
+}

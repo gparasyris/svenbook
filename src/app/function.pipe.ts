@@ -8,6 +8,7 @@ export class FunctionPipe implements PipeTransform {
       ret = callback.apply(context, [value, ...args]);
     } catch (err) {
       ret = null;
+      console.warn(`error in function pipe, while calling function ${callback}`)
     }
     return ret;
   }

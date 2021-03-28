@@ -3,17 +3,17 @@ import { DashboardComponentRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
-import { DashboardColumnComponent } from './dashboard-column/dashboard-column.component';
+import { DashboardService } from './dashboard.service';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, DashboardColumnComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
-    // OrderbookModule,
     DashboardComponentRoutingModule,
     OrderbookModule
-  ]
+  ],
+  providers: [DashboardService]
 })
 export class DashboardModule { }
