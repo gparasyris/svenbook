@@ -4,6 +4,15 @@
   // justify-content: center;
 }
 
+.--mobile{
+  margin: 0;
+  padding: 0;
+  .row, .col{
+    margin: 0;
+    padding: 0;
+  }
+}
+
 .mat-header-cell {
   width: 10em;
 }
@@ -34,6 +43,10 @@
   &.ask {
     background-color: pink;
 
+  }
+  &.right{
+    left: unset;
+    right: 0;
   }
 
 

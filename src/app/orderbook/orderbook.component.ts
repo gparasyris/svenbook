@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { WebsocketService } from '../websocket.service';
 
 interface IwebSocketResponse {
@@ -15,9 +15,22 @@ type IOrderTuple = [number, number, number?];
   selector: 'app-orderbook',
   templateUrl: './orderbook.component.html',
   styleUrls: ['./orderbook.component.scss'],
-  providers: [WebsocketService]
+  providers: [WebsocketService],
+  host: {
+    '(window:resize)': 'onResize($event)'
+  }
 })
 export class OrderbookComponent implements OnInit {
+
+  // @HostListener('window:resize')
+  // onResize() {
+  //   this.currentWindowWidth = window.innerWidth
+  // }
+
+  onResize(event){
+    this.currentWindowWidth = event.target.innerWidth; // window width
+  }
+
   bids: IOrderTuple[] = [];
   asks: IOrderTuple[] = [];
   displayAsks: IOrderTuple[] = [];
@@ -28,6 +41,7 @@ export class OrderbookComponent implements OnInit {
   firstBid: number = 0;
   firstSell: number = 0;
   title: string;
+  currentWindowWidth: number;
 
   iterator = [];
   constructor(public service: WebsocketService) {
@@ -49,6 +63,7 @@ export class OrderbookComponent implements OnInit {
     for (let i = 0; i < this.length; i++) {
       this.iterator.push(i);
     }
+    this.currentWindowWidth = window.innerWidth;
 
 
   }

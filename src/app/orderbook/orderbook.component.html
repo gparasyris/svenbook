@@ -3,56 +3,121 @@
 </div>
 
 <div *ngIf="displayAsks?.length > 0" style="height: 100%;" class="fade-page">
-  <table mat-table [dataSource]="displayAsks" class="mat-elevation-z8 asks-table" style="width: 100%">
-    <ng-container matColumnDef="Price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
-        <div class="bg-div ask" *ngIf="element && element[2] != null"
-          [ngStyle]="{'height': '24px', 'width': ((element[2]/maxAsk)*100) + '%'}">
-        </div>
-      </td>
-    </ng-container>
 
-    <ng-container matColumnDef="Amount">
-      <th mat-header-cell *matHeaderCellDef> Amount </th>
-      <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
-    </ng-container>
+  <div class="container --mobile" *ngIf="currentWindowWidth < 992; else desktopTemplate">
+    <div class="row">
+      <div class="col info">
+        {{firstSell - firstBid}} Spread
+      </div>
+    </div>
+    <div class=" row">
+      <div class="col">
 
-    <ng-container matColumnDef="Total">
-      <th mat-header-cell *matHeaderCellDef> Total </th>
-      <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="['Price', 'Amount', 'Total']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['Price', 'Amount', 'Total'];let i = index;">
-    </tr>
-  </table>
+        <table mat-table [dataSource]="displayBids" class="mat-elevation-z8 bids-table" style="width: 100%">
+          <ng-container matColumnDef="Total">
+            <th mat-header-cell *matHeaderCellDef> Total </th>
+            <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+          </ng-container>
 
-  <div class="info">
-    {{firstSell - firstBid}} Spread
+
+          <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
+              <div class="bg-div right" *ngIf="element != null && element[2]!= null"
+                [ngStyle]="{'height': '24px', 'width': ((element[2]/maxBid)*100) + '%'}">
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['Price', 'Total']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['Price', 'Total'];">
+          </tr>
+        </table>
+      </div>
+      <div class="col">
+        <table mat-table [dataSource]="displayAsks.reverse()" class="mat-elevation-z8 asks-table" style="width: 100%">
+
+
+          <!-- <ng-container matColumnDef="Amount">
+            <th mat-header-cell *matHeaderCellDef> Amount </th>
+            <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="Total">
+            <th mat-header-cell *matHeaderCellDef> Total </th>
+            <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
+              <div class="bg-div ask" *ngIf="element && element[2] != null"
+                [ngStyle]="{'height': '24px', 'width': ((element[2]/maxAsk)*100) + '%'}">
+              </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="['Price', 'Total']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['Price', 'Total'];let i = index;">
+          </tr>
+        </table>
+
+      </div>
+    </div>
+
   </div>
 
-  <table mat-table [dataSource]="displayBids" class="mat-elevation-z8 bids-table" style="width: 100%">
+  <ng-template #desktopTemplate>
+    <table mat-table [dataSource]="displayAsks" class="mat-elevation-z8 asks-table" style="width: 100%">
+      <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
+          <div class="bg-div ask" *ngIf="element && element[2] != null"
+            [ngStyle]="{'height': '24px', 'width': ((element[2]/maxAsk)*100) + '%'}">
+          </div>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="Price">
-      <th mat-header-cell *matHeaderCellDef> Price </th>
-      <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
-        <div class="bg-div" *ngIf="element != null && element[2]!= null"
-          [ngStyle]="{'height': '24px', 'width': ((element[2]/maxBid)*100) + '%'}">
-        </div>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="Amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="Amount">
-      <th mat-header-cell *matHeaderCellDef> Amount </th>
-      <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
-    </ng-container>
+      <ng-container matColumnDef="Total">
+        <th mat-header-cell *matHeaderCellDef> Total </th>
+        <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['Price', 'Amount', 'Total']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['Price', 'Amount', 'Total'];let i = index;">
+      </tr>
+    </table>
 
-    <ng-container matColumnDef="Total">
-      <th mat-header-cell *matHeaderCellDef> Total </th>
-      <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="['Price', 'Amount', 'Total']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['Price', 'Amount', 'Total'];">
-    </tr>
-  </table>
+    <div class="info">
+      {{firstSell - firstBid}} Spread
+    </div>
+
+    <table mat-table [dataSource]="displayBids" class="mat-elevation-z8 bids-table" style="width: 100%">
+
+      <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
+          <div class="bg-div" *ngIf="element != null && element[2]!= null"
+            [ngStyle]="{'height': '24px', 'width': ((element[2]/maxBid)*100) + '%'}">
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let element"> {{element[1]}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Total">
+        <th mat-header-cell *matHeaderCellDef> Total </th>
+        <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['Price', 'Amount', 'Total']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['Price', 'Amount', 'Total'];">
+      </tr>
+    </table>
+  </ng-template>
 </div>
