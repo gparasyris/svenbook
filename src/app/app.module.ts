@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { WebsocketService } from './websocket.service';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent
   ],
   imports: [
+    RouterModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
