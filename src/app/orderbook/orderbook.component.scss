@@ -1,0 +1,268 @@
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  width: 10em;
+}
+
+// .mat-header-row {
+//   background-color: purple;
+// }
+
+.mat-row{
+  position: relative;
+}
+
+.mat-cell{
+  // position: relative;
+}
+
+.bg-div {
+  background-color: lightgreen;
+  width: 0px;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  /* z-index: -1; */
+  top: 0;
+  bottom: 0;
+  height: 47px !important;
+  opacity: 0.5;
+  &.ask {
+    background-color: pink;
+
+  }
+
+
+}
+
+.bootstrap-test{
+  position: relative;
+  tr {
+    position: relative;
+  }
+}
+
+.rename {
+  padding: 20px;
+    box-shadow: 1 0 0 0 black;
+    /* box-shadow: 5px 5px 10px; */
+    margin: 10px;
+    box-shadow: 0 0 10px grey;
+    border-radius: 5px;
+}
+
+.mytable {
+  // .row {
+  //   height: 50px;
+  // }
+  .row {
+    position: relative;
+  }
+}
+
+/*
+#FF3B68 red
+#4C2033 red bg
+#21ab90g green bg
+#111721 gen bg
+
+#02C77A green text
+
+*/
+
+.bids-table{
+  background-color: #111721;
+  // text-transform:;
+  font-weight: 900;
+  font-size: 1rem;
+  th {
+    color: darkgray;
+    font-size: 1.2rem;
+    font-weight: 900;
+    background-color: transparent;
+  }
+  td {
+    color: white;
+    font-weight: 900;
+    font-size: 1.2rem;
+    &.price {
+      color: #02C77A;
+    }
+    .bg-div{
+      background-color: #21ab90;
+    }
+  }
+}
+
+.asks-table{
+  background-color: #111721;
+  th {
+    color: darkgray;
+    font-size: 1.2rem;
+    font-weight: 900;
+    background-color: transparent;
+  }
+  td {
+    color: white;
+    font-weight: 900;
+    font-size: 1.2rem;
+    &.price {
+      color: #FF3B68;
+    }
+    .bg-div{
+      background-color: #4C2033;
+    }
+  }
+}
+
+.info {
+
+  color: white;
+  text-align: center;
+  padding: 6px 12px;
+  /* margin: 2px; */
+  background: #111721;
+  border: 2px solid darkgray;
+}
+
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+  }
+  100% {
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacity: 0;
+  }
+}
+
+//
+
+// .zoomIn {
+//   animation: zoomInf 5s infinite;
+//   -webkit-animation: zoomInf 5s infinite;
+// }
+
+// @keyframes zoomInf {
+//   from {
+//     opacity: 0;
+//     transform: scale3d(.3, .3, .3);
+//   }
+//   50% {
+//     opacity: 1;
+//   }
+// }
+
+// @-webkit-keyframes zoomInf {
+//   from {
+//     opacity: 0;
+//     transform: scale3d(.3, .3, .3);
+//     -webkit-transform: scale3d(.3, .3, .3);
+//   }
+//   50% {
+//     opacity: 1;
+//   }
+// }
+
+
+// @keyframes bounceOutf {
+//   20% {
+//     transform: scale3d(.9, .9, .9);
+//   }
+//   50%,
+//   55% {
+//     opacity: 1;
+//     transform: scale3d(1.1, 1.1, 1.1);
+//   }
+//   to {
+//     opacity: 0;
+//     transform: scale3d(.3, .3, .3);
+//   }
+// }
+
+
+// @-webkit-keyframes  bounceOutf {
+//   20% {
+//     -webkit-transform: scale3d(.9, .9, .9);
+//   }
+//   50%,
+//   55% {
+//     opacity: 1;
+//     -webkit-transform: scale3d(1.1, 1.1, 1.1);
+//   }
+//   to {
+//     opacity: 0;
+//     -webkit-transform: scale3d(.3, .3, .3);
+//   }
+// }
+
+
+// .bounceOut {
+//   animation: bounceOutf 5s infinite;
+//   -webkit-animation: bounceOutf 5s infinite;
+// }
+
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+      top: 8px;
+      height: 64px;
+  }
+  50%,
+  100% {
+      top: 24px;
+      height: 32px;
+  }
+}

@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
+body{
+  // background: linear-gradient(to right, #0061f2 0%, #6900c7 100%);
+  background: linear-gradient(to right, #6900c7 0%, #0061f2 100%);
+
+}
+
+.fade-page
+{
+// width:100px;
+// height:100px;
+// background:red;
+top: 20px;
+position:relative;
+animation:mymove 1s ease-out forwards;
+/* animation-iteration-count:3; */
+
+/* Safari and Chrome */
+-webkit-animation:mymove 1s;
+/* -webkit-animation-iteration-count:3; */
+}
+
+@keyframes mymove
+{ 
+  from {top:0px; opacity: 0;}
+  to { top:20px; opacity: 1}
+}
+
+@-webkit-keyframes mymove /* Safari and Chrome */
+{
+  from {top:0px; opacity: 0;}
+  to {top:200px; opacity: 1;}
+}

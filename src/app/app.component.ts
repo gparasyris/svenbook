@@ -16,9 +16,9 @@ export class AppComponent {
 
   constructor(public service: WebsocketService) {
     this.service.connect();
-    // setTimeout(() => {
-    //   this.somethingElse()
-    // }, 5000);
+    setTimeout(() => {
+      this.sendMsg();
+    }, 5000);
   //   this.myWebSocket.subscribe(    
   //     msg => console.log('message received: ' + msg), 
   //     // Called whenever there is a message from the server    

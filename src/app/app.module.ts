@@ -8,16 +8,24 @@ import { AppComponent } from './app.component';
 import { OrderbookModule } from './orderbook/orderbook.module';
 import { OrderbookRowComponent } from './orderbook/orderbook-row/orderbook-row.component';
 import { FunctionPipe } from './function.pipe';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTableModule} from '@angular/material/table';
+import { Num2arrayPipe } from './num2array.pipe';
+import { ProgressbarDirective } from './progressbar.directive';
+import { ProgressbarComponent } from './shared/progressbar/progressbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
-      ],
+    AppComponent,
+    Num2arrayPipe      ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     OrderbookModule,
-    SharedModule
+    SharedModule,
+    MatTableModule
   ],
   providers: [WebsocketService],
   bootstrap: [AppComponent]
