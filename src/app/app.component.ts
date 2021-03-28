@@ -15,10 +15,10 @@ export class AppComponent {
   myWebSocket: WebSocketSubject<any> = webSocket('wss://www.cryptofacilities.com/ws/v1');
 
   constructor(public service: WebsocketService) {
-    this.service.connect();
-    setTimeout(() => {
-      this.sendMsg();
-    }, 5000);
+    // this.service.connect();
+    // setTimeout(() => {
+    //   this.sendMsg();
+    // }, 5000);
   //   this.myWebSocket.subscribe(    
   //     msg => console.log('message received: ' + msg), 
   //     // Called whenever there is a message from the server    

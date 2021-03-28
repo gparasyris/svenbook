@@ -13,8 +13,6 @@ import { MatTableModule } from '@angular/material/table';
   declarations: [OrderbookComponent, OrderbookRowComponent],
   imports: [
     CommonModule,
-    MatGridListModule,
-    BrowserAnimationsModule,
     SharedModule,
     MatGridListModule,
     MatTableModule

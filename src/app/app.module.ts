@@ -14,7 +14,7 @@ import {MatTableModule} from '@angular/material/table';
 import { Num2arrayPipe } from './num2array.pipe';
 import { ProgressbarDirective } from './progressbar.directive';
 import { ProgressbarComponent } from './shared/progressbar/progressbar.component';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +25,8 @@ import { ProgressbarComponent } from './shared/progressbar/progressbar.component
     AppRoutingModule,
     OrderbookModule,
     SharedModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [WebsocketService],
   bootstrap: [AppComponent]

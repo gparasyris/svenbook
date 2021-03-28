@@ -1,54 +1,9 @@
-<!-- <p>orderbook works!</p>
-
-<div *ngFor="let row of bids | fn : truncateArray : null : length ; trackBy: trackByMethod; let i= index"
-  style="border-bottom: 1px solid black;">
-  <i>
-    <app-orderbook-row [price]="row[0]" [amount]="row[1]" [total]="row[2]">
-    </app-orderbook-row>
-  </i>
+<div>
+  <h3 class="text-center">{{title}}</h3>
 </div>
- -->
 
-<!-- <mat-grid-list cols="3" rowHeight="1em">
-
-  <ng-template ngFor let-row [ngForOf]="bids | fn : truncateArray : null : length " let-i="index" [ngForTrackBy]="trackByMethod">
-    <mat-grid-tile>{{row[0]}}</mat-grid-tile>
-    <mat-grid-tile>{{row[1]}}</mat-grid-tile>
-    <mat-grid-tile>{{row[2]}}</mat-grid-tile>
-  </ng-template>
-</mat-grid-list> -->
-<!-- 
-<table mat-table [dataSource]="iterator" class="mat-elevation-z8" style="width: 100%">
-  AEK
-
-  <ng-container matColumnDef="Price">
-    <th mat-header-cell *matHeaderCellDef> Price </th>
-    <td mat-cell *matCellDef="let element"> {{asks && asks[element][0]}}
-      <div class="bg-div ask" *ngIf="asks && element != null && asks[element] != null && asks[element][2] != null" [ngStyle]="{'height': '24px', 'width': ((asks[element][2]/maxAsk)*100) + '%'}">
-      </div>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Amount">
-    <th mat-header-cell *matHeaderCellDef> Amount </th>
-    <td mat-cell *matCellDef="let element"> {{asks && asks[element][1]}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Total">
-    <th mat-header-cell *matHeaderCellDef> Total </th>
-    <td mat-cell *matCellDef="let element"> {{asks && asks[element][2]}} </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="['Price', 'Amount', 'Total']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['Price', 'Amount', 'Total'];let i = index;">
-    <ng-container>
-      onetwothree
-    </ng-container>
-  </tr>
-</table> -->
-<div *ngIf="displayAsks?.length > 0; else loader;" style="height: 100%;" class="fade-page">
+<div *ngIf="displayAsks?.length > 0" style="height: 100%;" class="fade-page">
   <table mat-table [dataSource]="displayAsks" class="mat-elevation-z8 asks-table" style="width: 100%">
-    AEK
-
     <ng-container matColumnDef="Price">
       <th mat-header-cell *matHeaderCellDef> Price </th>
       <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
@@ -69,16 +24,11 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="['Price', 'Amount', 'Total']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['Price', 'Amount', 'Total'];let i = index;">
-      <ng-container>
-        onetwothree
-      </ng-container>
     </tr>
   </table>
 
   <div class="info">
     {{firstSell - firstBid}} Spread
-    <!-- maxask: {{maxAsk}}
-    maxBid: {{maxBid}} -->
   </div>
 
   <table mat-table [dataSource]="displayBids" class="mat-elevation-z8 bids-table" style="width: 100%">
@@ -103,159 +53,6 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="['Price', 'Amount', 'Total']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['Price', 'Amount', 'Total'];">
-      AEK
     </tr>
   </table>
 </div>
-
-<ng-template #loader>
-  <!-- <div class="lds-ripple">
-    <div [ngStyle]="{ 'border-color': '#7f58af' }"></div>
-    <div [ngStyle]="{ 'border-color': '#7f58af' }"></div>
-  </div> -->
-
-  <!-- <div class="lds-facebook">
-    <div [ngStyle]="{ background: '#7f58af' }"></div>
-    <div [ngStyle]="{ background: '#7f58af' }"></div>
-    <div [ngStyle]="{ background: '#7f58af' }"></div>
-  </div> -->
-
-</ng-template>
-
-
-
-<!-- 
-
-<table mat-table [dataSource]="iterator" class="mat-elevation-z8" style="width: 100%">
-
-  <ng-container matColumnDef="Price">
-    <th mat-header-cell *matHeaderCellDef> Price </th>
-    <td mat-cell *matCellDef="let element"> {{bids && bids[element][0]}}
-      <div class="bg-div" *ngIf="bids != null && element != null && bids[element] != null && bids[element][2]!= null"  [ngStyle]="{'height': '24px', 'width': ((bids[element][2]/maxBid)*100) + '%'}">
-      </div>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Amount">
-    <th mat-header-cell *matHeaderCellDef> Amount </th>
-    <td mat-cell *matCellDef="let element"> {{bids && bids[element][1]}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Total">
-    <th mat-header-cell *matHeaderCellDef> Total </th>
-    <td mat-cell *matCellDef="let element"> {{bids && bids[element][2]}} </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="['Price', 'Amount', 'Total']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['Price', 'Amount', 'Total'];">
-    AEK
-  </tr>
-</table> -->
-
-<!-- <div class="container">
-  <div class="row">
-    <table class="table bootstrap-test">
-      <thead style="background-color: 'purple'">
-        <tr>
-          <th scope="col">Price</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let i of iterator" #row>
-          <td *ngFor="let val of asks[i]" [style.width]="(100/3)+'%'">
-            {{val}}
-          </td>
-          <div class="bg-div ask" [ngStyle]="{'height': '50px', 'width': ((asks[i][1]/maxAsk)*100) + '%'}">
-          </div>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row">
-    <div>
-      spread: {{firstSell - firstBid}}
-      maxask: {{maxAsk}}
-      maxBid: {{maxBid}}
-    </div>
-  </div>
-  <div class="row">
-    <table class="table bootstrap-test">
-      <thead style="background-color: 'purple'">
-        <tr>
-          <th scope="col">Price</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let i of iterator" #row>
-          <td *ngFor="let val of bids[i]" [style.width]="(100/3)+'%'">
-            {{val}}
-          </td>
-          <div class="bg-div" [ngStyle]="{'height': '50px', 'width': ((bids[i][1]/maxBid)*100) + '%'}">
-          </div>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div> -->
-<!-- 
-<div class="container mytable">
-  <div class="row">
-    <div class="container">
-      <div class="row header">
-        <div class="col">
-          Price
-        </div>
-        <div class="col">
-          Amount
-        </div>
-        <div class="col">
-          Total
-        </div>
-      </div>
-      <div class="row" *ngFor="let i of iterator" #row>
-        <ng-template [ngIf]="asks && asks[i]" >
-          <div class="col" *ngFor="let val of asks[i]">
-            {{val}}
-          </div>
-          <div class="bg-div ask"
-            [ngStyle]="{'height': '24px', 'width': ((asks[i][1]/maxAsk)*100) + '%'}">
-          </div>
-        </ng-template>
-      </div>
-    </div>
-
-  </div>
-  <div class="row">
-    <div>
-      spread: {{firstSell - firstBid}}
-      maxask: {{maxAsk}}
-      maxBid: {{maxBid}}
-    </div>
-  </div>
-  <div class="row">
-    <div class="container">
-      <div class="row header">
-        <div class="col">
-          Price
-        </div>
-        <div class="col">
-          Amount
-        </div>
-        <div class="col">
-          Total
-        </div>
-      </div>
-      <div class="row" *ngFor="let i of iterator" #row style="height: 24px;">
-        <ng-template [ngIf]="bids && bids[i]" >
-          <div class="col" *ngFor="let val of bids[i]">
-            {{val}}
-          </div>
-          <div class="bg-div ask" [ngStyle]="{'height': '24px', 'width': ((bids[i][1]/maxAsk)*100) + '%'}">
-          </div>
-        </ng-template>
-      </div>
-    </div>
-  </div> -->

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { debug } from 'node:console';
+import { WebsocketService } from '../websocket.service';
 
 interface IwebSocketResponse {
   feed: string,
@@ -14,7 +14,8 @@ type IOrderTuple = [number, number, number?];
 @Component({
   selector: 'app-orderbook',
   templateUrl: './orderbook.component.html',
-  styleUrls: ['./orderbook.component.scss']
+  styleUrls: ['./orderbook.component.scss'],
+  providers: [WebsocketService]
 })
 export class OrderbookComponent implements OnInit {
   bids: IOrderTuple[] = [];
@@ -26,20 +27,43 @@ export class OrderbookComponent implements OnInit {
   maxAsk: number = -1;
   firstBid: number = 0;
   firstSell: number = 0;
+  title: string;
 
   iterator = [];
-  constructor() { }
-  
+  constructor(public service: WebsocketService) {
+
+  }
 
   @Input() set incomingData(value) {
     if (value["bids"] != null)
       this.handleData(value);
   }
 
+  @Input() set configuration(value) {
+    if (value != null) {
+      this.processConfiguration(value);
+    }
+  }
+
   ngOnInit(): void {
-    for(let i =0; i< this.length; i++){
+    for (let i = 0; i < this.length; i++) {
       this.iterator.push(i);
     }
+
+
+  }
+
+  processConfiguration(config: any) {
+    this.title = config.title;
+    this.service.connect();
+    this.service.sendMessage({ "event": config.event, "feed": config.feed, "product_ids": [config.product_id] });
+    this.service.socket$.subscribe(
+      msg => {
+        this.incomingData = msg;
+      },
+      //     // Called whenever there is a message from the server    
+      err => console.log(err),
+    )
   }
 
   handleData(data: IwebSocketResponse) {
@@ -70,14 +94,13 @@ export class OrderbookComponent implements OnInit {
     }
 
     this.bids = [...localBIds];
-    this.displayBids = [...this.truncateArray(localBIds, this.length)]; //.slice(0, 9)
-    this.maxBid = localBIds[this.length +5][2];
+    this.displayBids = [...this.truncateArray(localBIds, this.length)];
+    this.maxBid = localBIds[this.length + 5][2];
     this.firstBid = this.bids[0][0];
-    if(this.bids.length < this.length){
+    if (this.bids.length < this.length) {
       debugger;
     }
 
-    //
     localBIds = JSON.parse(JSON.stringify(this.asks))
     data.asks.forEach((row) => {
       const position = localBIds.findIndex(x => x[0] == row[0]);
@@ -95,7 +118,7 @@ export class OrderbookComponent implements OnInit {
     });
 
     localBIds = localBIds.
-      sort((a, b) =>  a[0] - b[0])
+      sort((a, b) => a[0] - b[0])
     for (const [index, row] of localBIds.entries()) {
       let add = row[1];
       if (index !== 0) {
@@ -103,41 +126,27 @@ export class OrderbookComponent implements OnInit {
       }
       row[2] = add;
     }
-
-
-    // this.asks = [...localBIds]; //.slice(0, 9)
-    // this.maxAsk = this.asks[this.length+1][2];
     this.displayAsks = [...this.truncateArray(localBIds, this.length, true)];
     this.asks = [...localBIds];
-    this.maxAsk = localBIds[this.length +5][2]
+    this.maxAsk = localBIds[this.length + 5][2]
     this.firstSell = localBIds[0][0]
-    if(this.asks.length < this.length){
+    if (this.asks.length < this.length) {
       debugger;
     }
 
   }
 
   trackByMethod(index: number, el: any): number {
-    return index; //el[0];
+    return index;
   }
 
   truncateArray(array: any[], length: number, reverse = false) {
-    if(!reverse) return array.slice(0, length);
+    if (!reverse) return array.slice(0, length);
     return array.slice(0, length).reverse();
   }
 
-  getValue(array, index, position){
+  getValue(array, index, position) {
     return array?.[index]?.[position];
   }
 
 }
-
-
-// @Component({
-//   selector: 'app-orderbook',
-//   templateUrl: './orderbook.component.html',
-//   styleUrls: ['./orderbook.component.scss']
-// })
-// export class mat-row implements OnInit {
-
-// }
