@@ -55,15 +55,7 @@ export class OrderbookComponent implements OnInit {
     }
   }
 
-  // bids: IOrderTuple[] = [];
-  // asks: IOrderTuple[] = [];
-  // displayAsks: IOrderTuple[] = [];
-  // displayBids: IOrderTuple[] = [];
   length = 8;
-  // maxBid: number = -1;
-  // maxAsk: number = -1;
-  // firstBid: number = 0;
-  // firstSell: number = 0;
   title: string;
   currentWindowWidth: number;
   iterator = [];

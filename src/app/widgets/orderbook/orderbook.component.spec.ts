@@ -6,6 +6,7 @@ import { OrderbookComponent } from './orderbook.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '@app/shared/shared.module';
+import { IOrderTuple } from '@interfaces/order-tupple.interace';
 
 describe('OrderbookComponent', () => {
   let component: OrderbookComponent;
@@ -44,6 +45,14 @@ describe('OrderbookComponent', () => {
     };
     component.processConfiguration(conf);
     expect(component.title).toBe(conf.title);
+  });
+
+  it('should calculate bid variables', () => {
+
+    component.prepareViewData(mockData.bids as IOrderTuple[], component.data.bids);
+    expect(component.data.bids.first).toBe(preccalculatedResults.firstBid);
+    expect(component.data.bids.last).toBe(preccalculatedResults.maxBid);
+
   });
 
   it('should calculate bid & ask limit variables', () => {
