@@ -1,7 +1,7 @@
 import { IWidgetConfiguration } from '@interfaces/widget-configuration.interface';
 import { IwebSocketResponse } from '@interfaces/websocket.interface'
 import { IOrderTuple } from '@interfaces/order-tupple.interace';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SubscriptionLike } from 'rxjs';
 import { WebsocketService } from '@services/websocket-service/websocket.service';
 
@@ -61,6 +61,9 @@ export class OrderbookComponent implements OnInit {
   iterator = [];
   webSocketSubscription: SubscriptionLike;
 
+  @Output() message: EventEmitter<string> = new EventEmitter();
+
+
   constructor(public service: WebsocketService, private cdr: ChangeDetectorRef) {
 
   }
@@ -99,7 +102,8 @@ export class OrderbookComponent implements OnInit {
       msg => {
         this.incomingData = msg;
       },
-      err => console.log(err),
+      err => this.message.emit(`Error: there was an error while retrieving data related to ${config.product_id}.`),
+      () => this.message.emit(`Oops, there seems to be an error, try refreshing the page`)
     )
   }
 

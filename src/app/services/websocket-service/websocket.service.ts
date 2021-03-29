@@ -17,11 +17,6 @@ export class WebsocketService implements OnDestroy {
 
     if (!this.socket$ || this.socket$.closed) {
       this.socket$ = this.getNewWebSocket(WS_ENDPOINT);
-      this.socket$.subscribe(
-        msg => { },
-        err => console.warn(err),
-        () => console.log('complete')
-      );
     }
   }
 
@@ -43,6 +38,7 @@ export class WebsocketService implements OnDestroy {
       closeObserver: {
         next: () => {
           console.log('[DataService]: connection closed');
+          this.socket$.error('connection closed');
           this.socket$ = undefined;
           this.connect({ reconnect: true });
         }

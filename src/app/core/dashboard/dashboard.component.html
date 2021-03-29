@@ -4,7 +4,7 @@
       <div *ngFor="let widget of column.widgets">
         <div [ngSwitch]="widget.type">
           <div *ngSwitchCase="'orderbook'">
-            <app-orderbook [configuration]="widget.configuration">
+            <app-orderbook [configuration]="widget.configuration" (message)="displayMessage($event)">
             </app-orderbook>
           </div>
           <div *ngSwitchDefault>
@@ -19,3 +19,4 @@
     <div class="alert-box error"><span>error: </span> {{errorMessage}}</div>
   </ng-template>
 </div>
+<div *ngIf="incomingMessage != ''" class="alert-box error"><span>error: </span> {{incomingMessage}}</div>

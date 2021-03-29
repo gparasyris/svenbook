@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   config: IConfiguration;
   dashboardName: string = '';
   errorMessage: string = '';
+  incomingMessage: string = '';
   activeRouterSub: SubscriptionLike;
 
   constructor(private dashboardService: DashboardService, private actRoute: ActivatedRoute) { }
@@ -40,6 +41,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.errorMessage = `Error while retrieving config for dashboard '${this.dashboardName}': ${err?.body || err?.message}`
         }
       );
+  }
+
+  displayMessage(message: string): void {
+    this.incomingMessage = message;
+    setTimeout(() => {
+      if(this.incomingMessage === message){
+        this.incomingMessage = "";
+      }
+    }, 5000);
   }
 
   ngOnDestroy() {
