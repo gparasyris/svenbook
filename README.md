@@ -17,4 +17,5 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 The app has been deployed and can be found at `https://svenbook.netlify.app/`;
 
 Visit `https://svenbook.netlify.app/dashboards/orderbook-single` to check single widget configuration.
+
 Visit `https://svenbook.netlify.app/dashboards/orderbook-multiple` to check multiple widgets being rendered at the same time.
