@@ -19,3 +19,5 @@ The app has been deployed and can be found at `https://svenbook.netlify.app/`;
 Visit `https://svenbook.netlify.app/dashboards/orderbook-single` to check single widget configuration.
 
 Visit `https://svenbook.netlify.app/dashboards/orderbook-multiple` to check multiple widgets being rendered at the same time.
+
+A switch button has been added at the top right corner to help navigate between the two pre-configured dashboards.
