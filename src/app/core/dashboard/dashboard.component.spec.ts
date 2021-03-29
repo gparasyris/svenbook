@@ -24,9 +24,9 @@ describe('DashboardComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {
+            // snapshot: {
               params: from([{ id: 1 }])
-            }
+            // }
           },
         }
       ],
@@ -83,6 +83,16 @@ describe('DashboardComponent', () => {
     tick();
     expect(component.config).toEqual(config);
     expect(req.request.method).toBe('GET');
+  }));
+
+  it('it should show error message', fakeAsync(() => {
+
+    const fail = "orderbook-fail";
+    component.dashboardName = fail;
+    component.getDashboardConfig();
+    const req = httpMock.expectOne(`assets/${fail}.config.json`).error(new ErrorEvent('404'));
+    tick();
+    expect(component.errorMessage).toEqual(`Error while retrieving config for dashboard 'orderbook-fail': Http failure response for assets/orderbook-fail.config.json: 0 `);
   }));
 });
 

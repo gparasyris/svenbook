@@ -48,10 +48,15 @@ describe('OrderbookComponent', () => {
   });
 
   it('should calculate bid variables', () => {
-
-    component.prepareViewData(mockData.bids as IOrderTuple[], component.data.bids);
-    expect(component.data.bids.first).toBe(preccalculatedResults.firstBid);
-    expect(component.data.bids.last).toBe(preccalculatedResults.maxBid);
+    const temp = {
+      first: null,
+      last: null,
+      displayList: null,
+      cache: null,
+    };
+    component.prepareViewData(mockData.bids as IOrderTuple[], temp);
+    expect(temp.first).toBe(preccalculatedResults.firstBid);
+    expect(temp.last).toBe(preccalculatedResults.maxBid);
 
   });
 
