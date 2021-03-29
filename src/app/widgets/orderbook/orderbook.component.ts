@@ -32,7 +32,7 @@ export class OrderbookComponent implements OnInit {
 
   onResize(event) {
     this.currentWindowWidth = event.target.innerWidth
-    if (event.target.innerHeight < 800) {
+    if (event.target.innerHeight < 900) {
       this.length = 4
     }
     else {
@@ -77,7 +77,7 @@ export class OrderbookComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (window.innerHeight < 800) {
+    if (window.innerHeight < 900) {
       this.length = 4
     }
     else {

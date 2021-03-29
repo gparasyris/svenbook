@@ -1,5 +1,5 @@
 {
-  "name": "orderbook",
+  "name": "orderbook-multiple",
   "layout": {
     "type": "row",
     "columns": [
@@ -11,8 +11,8 @@
             "configuration": {
               "event": "subscribe",
               "feed": "book_ui_1",
-              "product_id": "PI_ETHUSD",
-              "title": "Ethereum - USD"
+              "product_id": "PI_XBTUSD",
+              "title": "Bitcoin - USD"
             }
           }
         ]
@@ -25,9 +25,8 @@
             "configuration": {
               "event": "subscribe",
               "feed": "book_ui_1",
-              "product_id": "PI_XBTUSD",
-              "title": "Bitcoin - USD"
-              
+              "product_id": "PI_ETHUSD",
+              "title": "Ethereum - USD"
             }
           }
         ]
