@@ -1,9 +1,9 @@
 <div>
   <h3 class="text-center">{{title}}</h3>
 </div>
-<div *ngIf="data.bids?.displayList?.length || data.asks?.displayList?.length" style="height: 100%;" class="fade-page">
+<div *ngIf="data.bids?.displayList?.length || data.asks?.displayList?.length" class="fade-page h-100">
 
-  <div class="container --mobile" *ngIf="currentWindowWidth < 992; else desktopTemplate">
+  <div class="container --mobile" *ngIf="currentWindowWidth < 992 && currentWindowWidth > 374; else desktopTemplate">
     <div class="row">
       <div class="col info">
         {{(data.asks.first - data.bids.first) | number : '1.2-2'}} Spread
@@ -12,7 +12,7 @@
     <div class=" row">
       <div class="col">
 
-        <table mat-table [dataSource]="data.bids?.displayList" class="mat-elevation-z8 bids-table" style="width: 100%">
+        <table mat-table [dataSource]="data.bids?.displayList" class="mat-elevation-z8 bids-table w-100">
           <ng-container matColumnDef="Total">
             <th mat-header-cell *matHeaderCellDef> Total </th>
             <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
@@ -33,8 +33,7 @@
         </table>
       </div>
       <div class="col">
-        <table mat-table [dataSource]="data.asks?.displayList?.reverse()" class="mat-elevation-z8 asks-table"
-          style="width: 100%">
+        <table mat-table [dataSource]="data.asks?.displayList?.reverse()" class="mat-elevation-z8 asks-table w-100">
 
           <ng-container matColumnDef="Total">
             <th mat-header-cell *matHeaderCellDef> Total </th>
@@ -60,7 +59,7 @@
   </div>
 
   <ng-template #desktopTemplate>
-    <table mat-table [dataSource]="data.asks?.displayList" class="mat-elevation-z8 asks-table" style="width: 100%">
+    <table mat-table [dataSource]="data.asks?.displayList" class="mat-elevation-z8 asks-table w-100">
       <ng-container matColumnDef="Price">
         <th mat-header-cell *matHeaderCellDef> Price </th>
         <td mat-cell *matCellDef="let element" class="price"> {{element[0]}}
@@ -88,7 +87,7 @@
       {{(data.asks.first - data.bids.first) | number : '1.2-2'}} Spread
     </div>
 
-    <table mat-table [dataSource]="data.bids?.displayList" class="mat-elevation-z8 bids-table" style="width: 100%">
+    <table mat-table [dataSource]="data.bids?.displayList" class="mat-elevation-z8 bids-table w-100">
 
       <ng-container matColumnDef="Price">
         <th mat-header-cell *matHeaderCellDef> Price </th>
