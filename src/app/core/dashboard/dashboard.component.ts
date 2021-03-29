@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IConfiguration } from '@interfaces/configuration.interface';
 import { DashboardService } from '@services/dashboard-service/dashboard.service';
@@ -6,7 +6,8 @@ import { DashboardService } from '@services/dashboard-service/dashboard.service'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
 
@@ -14,7 +15,7 @@ export class DashboardComponent implements OnInit {
   dashboardName: string = '';
   errorMessage: string = '';
 
-  constructor(private dashboardService: DashboardService, private actRoute: ActivatedRoute) { }
+  constructor(private dashboardService: DashboardService, private actRoute: ActivatedRoute, private cdr: ChangeDetectorRef) { }
 
 
   ngOnInit(): void {
@@ -35,7 +36,8 @@ export class DashboardComponent implements OnInit {
         },
         err => {
           this.errorMessage = `Error while retrieving config for dashboard '${this.dashboardName}': ${err?.body || err?.message}`
-        }
+        },
+        () => this.cdr.detectChanges()
       );
   }
 }

@@ -50,20 +50,20 @@ describe('OrderbookComponent', () => {
 
     component.incomingData = mockData;
 
-    expect(component.firstSell).toBe(preccalculatedResults.firstSell);
-    expect(component.maxAsk).toBe(preccalculatedResults.maxASk);
-    expect(component.firstBid).toBe(preccalculatedResults.firstBid);
-    expect(component.maxBid).toBe(preccalculatedResults.maxBid);
+    expect(component.data.asks.first).toBe(preccalculatedResults.firstSell);
+    expect(component.data.asks.last).toBe(preccalculatedResults.maxASk);
+    expect(component.data.bids.first).toBe(preccalculatedResults.firstBid);
+    expect(component.data.bids.last).toBe(preccalculatedResults.maxBid);
 
   });
 
   it('should remove price with 0 quantity', () => {
     component.incomingData = mockData;
-    expect(component.firstBid).toBe(preccalculatedResults.firstBid);
-    console.log(component.displayBids);
+    expect(component.data.bids.first).toBe(preccalculatedResults.firstBid);
+    console.log(component.data.bids.displayList);
     component.incomingData = mockDataWithZero;
-    console.log(component.displayBids);
-    expect(component.firstBid).toBe(preccalculatedResults.secondBid);
+    console.log(component.data.bids.displayList);
+    expect(component.data.bids.first).toBe(preccalculatedResults.secondBid);
   });
 
   it('should truncate array', () => {
