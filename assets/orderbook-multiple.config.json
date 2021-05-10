@@ -1,0 +1,51 @@
+{
+  "name": "orderbook",
+  "layout": {
+    "type": "row",
+    "columns": [
+      {
+        "size": "lg",
+        "widgets": [
+          {
+            "type": "orderbook",
+            "configuration": {
+              "event": "subscribe",
+              "feed": "book_ui_1",
+              "product_id": "PI_ETHUSD",
+              "title": "Ethereum - USD"
+            }
+          }
+        ]
+      },
+      {
+        "size": "lg",
+        "widgets": [
+          {
+            "type": "orderbook",
+            "configuration": {
+              "event": "subscribe",
+              "feed": "book_ui_1",
+              "product_id": "PI_XBTUSD",
+              "title": "Bitcoin - USD"
+              
+            }
+          }
+        ]
+      },
+      {
+        "size": "lg",
+        "widgets": [
+          {
+            "type": "orderbook",
+            "configuration": {
+              "event": "subscribe",
+              "feed": "book_ui_1",
+              "product_id": "PI_LTCUSD",
+              "title": "Litecoin - USD"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
