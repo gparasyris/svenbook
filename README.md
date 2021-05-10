@@ -1,5 +1,18 @@
 # Svenbook
 
+## Description
+
+This is an orderbook demo app connecting to cryptofacilities websocket API.
+
+## Demo
+The app has been deployed and can be found at `https://svenbook.netlify.app/`;
+
+Visit `https://svenbook.netlify.app/dashboards/orderbook-single` to check single widget configuration.
+
+Visit `https://svenbook.netlify.app/dashboards/orderbook-multiple` to check multiple widgets being rendered at the same time.
+
+A switch button has been added at the top right corner to help navigate between the two pre-configured dashboards.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.
 
 ## How to run
@@ -17,13 +30,3 @@ Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.gi
 ## Running compodoc
 
 Run `npm run compodoc && npm run show-doc` to prepapre and serve the compodoc files.  Navigate to `http://localhost:8080/` to view them.
-
-
-## Demo
-The app has been deployed and can be found at `https://svenbook.netlify.app/`;
-
-Visit `https://svenbook.netlify.app/dashboards/orderbook-single` to check single widget configuration.
-
-Visit `https://svenbook.netlify.app/dashboards/orderbook-multiple` to check multiple widgets being rendered at the same time.
-
-A switch button has been added at the top right corner to help navigate between the two pre-configured dashboards.
